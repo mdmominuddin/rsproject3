@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container text-center mt-5">
+    <h2 class="my-3">Welcome to the BQ Analysis System</h2>
+    <p>This is an application meant to analyze BOQ and make automatic responses.</p>
+
+    <h3>File Analysis</h3>
+    <div class="card mx-auto" style="max-width: 500px;">
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="{{ form.projectname.id_for_label }}" class="form-label">Project Name</label>
+            {{ form.projectname }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.filename.id_for_label }}" class="form-label">File Name</label>
+            {{ form.filename }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.remark.id_for_label }}" class="form-label">Remark</label>
+            {{ form.remark }}
+          </div>
+
+          <div class="mb-3">
+            <label for="{{ form.uploadfile.id_for_label }}" class="form-label">Upload File</label>
+            {{ form.uploadfile }}
+          </div>
+
+          <button type="submit" class="btn btn-primary my-3 ">Upload File</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
