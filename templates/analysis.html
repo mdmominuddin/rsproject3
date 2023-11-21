@@ -17,7 +17,7 @@
           <td>{{ d.projectname }}</td>
           <td>{{ d.filename }}</td>
           <td>{{ d.remark }}</td>
-          <td>{{ d.uploadfile.url }}</td>
+          <td><a href="{{ d.uploadfile.url }}" target="_blank">View File</a></td>
         </tr>
       {% endfor %}
     </table>
