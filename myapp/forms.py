@@ -31,11 +31,20 @@ class UserLoginForm(AuthenticationForm):
 class FileAnalysisForm(forms.ModelForm):
     class Meta:
         model = FileAnalysis
-        fields = ['user','projectname','filename','remark','uploadfile']
-        widgets = {
-            'projectname': forms.TextInput(attrs={'class': 'form-control'}),
-            'filename': forms.TextInput(attrs={'class': 'form-control'}),
+        fields = ['user', 'projectname', 'filename', 'remark', 'uploadfile']
 
-            'remark': forms.TextInput(attrs={'class': 'form-control'}),
-            'uploadfile': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
-        }
+    def __init__(self, *args, **kwargs):
+        super(FileAnalysisForm, self).__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+    def clean_filename(self):
+        user = self.cleaned_data.get('user')
+        filename = self.cleaned_data.get('filename')
+
+        # Check uniqueness of filename within the user's files
+        if FileAnalysis.objects.filter(user=user, filename=filename).exists():
+            raise forms.ValidationError('A file with this name already exists for the user.')
+
+        return filename

@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container text-center mt-5">
-    <h2 class="my-3">Welcome to the BQ Analysis System</h2>
-    <p>This is an application meant to analyze BOQ and make automatic responses.</p>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Welcome to the BQ Analysis System</h2>
+    <p class="text-center">This is an application meant to analyze BOQ and make automatic responses.</p>
 
-    <h3>File Analysis</h3>
     <div class="card mx-auto" style="max-width: 500px;">
       <div class="card-body">
-        <form method="post">
+        <h3 class="card-title text-center mb-4">File Analysis</h3>
+        <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="{{ form.user.id_for_label }}" class="form-label">User Name</label>
+            {{ form.user }}
+          </div>
 
           <div class="mb-3">
             <label for="{{ form.projectname.id_for_label }}" class="form-label">Project Name</label>
@@ -31,7 +36,9 @@
             {{ form.uploadfile }}
           </div>
 
-          <button type="submit" class="btn btn-primary my-3 ">Upload File</button>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
         </form>
       </div>
     </div>

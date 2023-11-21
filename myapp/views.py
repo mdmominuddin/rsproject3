@@ -9,17 +9,24 @@ from .models import FileAnalysis
 
 
 # Create your views here.
+
+
 @login_required
 def home(request):
-    # If the user is logged in, you can show the File Analysis form
     if request.method == 'POST':
-        form = FileAnalysisForm(request.POST)
+        form = FileAnalysisForm(request.POST, request.FILES)
         if form.is_valid():
+            form.user = request.user  # Set the user field to the logged-in user
             form.save()
+            messages.success(request, "File analysis data saved successfully.")
+            return redirect('homepage')  # Redirect to your home page or wherever you want
+        else:
+            print(form.errors)
     else:
         form = FileAnalysisForm()
 
-    return render(request, 'homepage.html', {'form':form})
+    return render(request, 'homepage.html', {'form': form})
+
 
 
 def public_home(request):

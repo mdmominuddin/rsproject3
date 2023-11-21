@@ -3,25 +3,23 @@
 {% block content %}
   <div class="container text-center mt-5">
     <h2 class="my-3">File Analysis</h2>
-      <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>User</th>
+        <th>Proj</th>
+        <th>File Name</th>
+        <th>Remark</th>
+        <th>File_Url</th>
+      </tr>
+      {% for d in data %}
         <tr>
-          <th>User</th>
-          <th>Proj</th>
-          <th>File Name</th>
-          <th>Remark</th>
-          <th>File_Url</th>
+          <td>{{ d.user }}</td>
+          <td>{{ d.projectname }}</td>
+          <td>{{ d.filename }}</td>
+          <td>{{ d.remark }}</td>
+          <td>{{ d.uploadfile.url }}</td>
         </tr>
-        <tr>
-          {% for d in data %}
-          <td> {{ d.user }}</td>
-          <td> {{ d.projectname }}</td>
-          <td> {{ d.filename }}</td>
-          <td> {{ d.remark }}</td>
-          <td> {{ d.uploadfile.url }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-
-
+      {% endfor %}
+    </table>
   </div>
 {% endblock %}
