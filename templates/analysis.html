@@ -3,23 +3,30 @@
 {% block content %}
   <div class="container text-center mt-5">
     <h2 class="my-3">File Analysis</h2>
-    <table class="table table-bordered table-striped">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">File Name</th>
+      <th scope="col">Remark</th>
+      <th scope="col">File URL</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
       <tr>
-        <th>User</th>
-        <th>Proj</th>
-        <th>File Name</th>
-        <th>Remark</th>
-        <th>File_Url</th>
+        <td class="text-left">{{ d.user }}</td>
+        <td class="text-left">{{ d.projectname }}</td>
+        <td class="text-left">{{ d.filename }}</td>
+        <td class="text-left">{{ d.remark }}</td>
+        <td class="text-left">{{ d.uploadfile.url }}</td>
+        <td class="text-left"><a href="{{ d.uploadfile.url }}" target="_blank">View File</a></td>
       </tr>
-      {% for d in data %}
-        <tr>
-          <td>{{ d.user }}</td>
-          <td>{{ d.projectname }}</td>
-          <td>{{ d.filename }}</td>
-          <td>{{ d.remark }}</td>
-          <td><a href="{{ d.uploadfile.url }}" target="_blank">View File</a></td>
-        </tr>
-      {% endfor %}
-    </table>
+    {% endfor %}
+  </tbody>
+</table>
+
   </div>
 {% endblock %}

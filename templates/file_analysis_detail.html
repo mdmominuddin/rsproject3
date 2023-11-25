@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>File Analysis Detail</h2>
+  <p>User: {{ file_analysis.user }}</p>
+  <p>Project Name: {{ file_analysis.projectname }}</p>
+  <!-- Add other fields as needed -->
+
+  <p><a href="{{ file_analysis.uploadfile.url }}" target="_blank">View File</a></p>
+  <!-- Display other analysis details or results -->
+{% endblock %}

@@ -2,13 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegistrationForm, UserLoginForm, FileAnalysisForm
 from django.contrib import messages
 from .models import FileAnalysis
-
-
-# Create your views here.
 
 
 @login_required
@@ -16,16 +13,18 @@ def home(request):
     if request.method == 'POST':
         form = FileAnalysisForm(request.POST, request.FILES)
         if form.is_valid():
-            form.user = request.user  # Set the user field to the logged-in user
+            form.instance.user = request.user  # Set the user field to the logged-in user
             form.save()
             messages.success(request, "File analysis data saved successfully.")
-            return redirect('homepage')  # Redirect to your home page or wherever you want
+            return redirect('analysis')  # Redirect to your analysis page or wherever you want
         else:
             print(form.errors)
     else:
         form = FileAnalysisForm()
 
-    return render(request, 'homepage.html', {'form': form})
+    analyses = FileAnalysis.objects.filter(user=request.user)
+
+    return render(request, 'home.html', {'form': form, 'analyses': analyses})
 
 
 
@@ -75,7 +74,15 @@ def user_logout(request):
 @login_required
 def file_analysis(request):
     data = FileAnalysis.objects.all()
+    analyses = FileAnalysis.objects.filter(user=request.user)
     context = {
-        'data': data
+        'data': data,
+        'analyses': analyses
     }
     return render(request, 'analysis.html', context)
+
+
+def file_analysis_detail(request, analysis_id):
+    file_analysis = get_object_or_404(FileAnalysis, id=analysis_id)
+    context = {'file_analysis': file_analysis}
+    return render(request, 'file_analysis_detail.html', context)

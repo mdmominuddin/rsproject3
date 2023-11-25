@@ -87,22 +87,24 @@
       <!-- Add User Registration and Login Links -->
       {% if user.is_anonymous %}
         <ul class="navbar-nav">
+
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-link" href="{% url 'login' %}">Rapid System</a>
           </li>
         </ul>
       {% else %}
         <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
 
           <li class="nav-item text-white">
             <a class="nav-link" href="{% url 'homepage' %}">Home</a>
           </li><li class="nav-item text-white">
 
           <li class="nav-item text-white">
-            <a class="nav-link" href="{% url 'analysis' %}">Analysis</a>
+            <a class="nav-link" href="{% url 'analysis' %}">Files</a>
           </li>
 
           <li class="nav-item text-white">
