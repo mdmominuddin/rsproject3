@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page_title }}</title>
     <style>
-      .navbar-brand {
+
+        .navbar-brand {
         font-size: 1.5rem;
         font-weight: bold;
       }
@@ -69,7 +70,7 @@
     </ul>
 {% endif %}
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-info ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-secondary ">
     <a class="navbar-brand" href="#">{{ site_name }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -100,11 +101,11 @@
           </li>
 
           <li class="nav-item text-white">
-            <a class="nav-link" href="{% url 'homepage' %}">Home</a>
+            <a class="nav-link" href="{% url 'homepage' %}">Upload Files</a>
           </li><li class="nav-item text-white">
 
           <li class="nav-item text-white">
-            <a class="nav-link" href="{% url 'analysis' %}">Files</a>
+            <a class="nav-link" href="{% url 'analysis' %}">Files Archives</a>
           </li>
 
           <li class="nav-item text-white">

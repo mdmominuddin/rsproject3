@@ -10,6 +10,7 @@ from .models import FileAnalysis
 
 @login_required
 def home(request):
+    form = FileAnalysisForm()
     if request.method == 'POST':
         form = FileAnalysisForm(request.POST, request.FILES)
         if form.is_valid():
@@ -24,7 +25,7 @@ def home(request):
 
     analyses = FileAnalysis.objects.filter(user=request.user)
 
-    return render(request, 'home.html', {'form': form, 'analyses': analyses})
+    return render(request, 'homepage.html', {'form': form, 'analyses': analyses})
 
 
 
