@@ -87,3 +87,15 @@ def file_analysis_detail(request, analysis_id):
     file_analysis = get_object_or_404(FileAnalysis, id=analysis_id)
     context = {'file_analysis': file_analysis}
     return render(request, 'file_analysis_detail.html', context)
+
+
+@login_required
+def delete_file(request, file_id):
+    file_analysis = get_object_or_404(FileAnalysis, id=file_id, user=request.user)
+
+    if request.method == 'POST':
+        file_analysis.delete()
+        messages.success(request, "File analysis data deleted successfully.")
+        return redirect('analysis')  # Redirect to your homepage or wherever you want
+
+    return render(request, 'delete_confirmation.html', {'file_analysis': file_analysis})

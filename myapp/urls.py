@@ -9,5 +9,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('file_analysis/', views.file_analysis, name='analysis'),
     path('file-analysis/<int:analysis_id>/', views.file_analysis_detail, name='file_analysis_detail'),
+    path('delete_file/<int:file_id>/', views.delete_file, name='delete_file'),
     # Add other URLs for your app as needed
 ]

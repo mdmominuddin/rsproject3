@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container text-center mt-5">
+    <h2 class="my-3">Delete File Analysis</h2>
+    <p>Are you sure you want to delete the file analysis for "{{ file_analysis.filename }}"?</p>
+    <form method="post" action="{% url 'delete_file' file_analysis.id %}">
+      {% csrf_token %}
+      <button type="submit">Yes, delete</button>
+    </form>
+    <a href="{% url 'home' %}">Cancel</a>
+  </div>
+{% endblock %}

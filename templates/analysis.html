@@ -2,31 +2,37 @@
 
 {% block content %}
   <div class="container text-center mt-5">
-    <h2 class="my-3">File Analysis</h2>
-    <table class="table table-bordered border-primary">
-  <thead>
-    <tr>
-      <th scope="col">User</th>
-      <th scope="col">Project Name</th>
-      <th scope="col">File Name</th>
-      <th scope="col">Remark</th>
-      <th scope="col">File URL</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for d in data %}
-      <tr>
-        <td style="text-align: left;">{{ d.user }}</td>
-        <td style="text-align: left;">{{ d.projectname }}</td>
-        <td style="text-align: left;">{{ d.filename }}</td>
-        <td style="text-align: left;">{{ d.remark }}</td>
-        <td style="text-align: left;">{{ d.uploadfile.url }}</td>
-        <td style="text-align: left;"><a href="{{ d.uploadfile.url }}" target="_blank">View File</a></td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    <h2 class="my-3">File Upload</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Updated By</th>
+          <th scope="col">Project Name</th>
+          <th scope="col">File Name</th>
+          <th scope="col">Remark</th>
+          <th scope="col">File URL</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in data %}
+          <tr>
+            <td style="text-align: left;">
+              <span>{{ user.username }}</span>
+              <!-- If you want to use an input field, uncomment the line below -->
+              <!-- <input type="text" value="{{ user.username }}" readonly> -->
+            </td>
+            <td style="text-align: left;">{{ d.projectname }}</td>
+            <td style="text-align: left;">{{ d.filename }}</td>
+            <td style="text-align: left;">{{ d.remark }}</td>
+            <td style="text-align: left;">{{ d.uploadfile.url }}</td>
+            <td style="text-align: left;">
+              <a href="{% url 'delete_file' d.id %}">Delete</a>
 
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}
