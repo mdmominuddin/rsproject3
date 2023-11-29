@@ -6,3 +6,4 @@ django-extensions
 gunicorn
 whitenoise
 psycopg2
+ezdxf
