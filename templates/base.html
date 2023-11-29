@@ -85,12 +85,11 @@
         {% endfor %}
       </ul>
 
-      <!-- Add User Registration and Login Links -->
-      {% if user.is_anonymous %}
-        <ul class="navbar-nav">
 
+      {% if not user.is_authenticated %}
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Rapid System</a>
+            <a class="nav-link" href="{% url 'login' %}">RS</a>
           </li>
         </ul>
       {% else %}
@@ -117,7 +116,7 @@
     </div>
   </nav>
 
-  <main role="main" class="container-fluid mt-3">
+  <main role="main" class="container-fluid mt-3 pb-3">
     {% block content %}
     {% endblock content %}
   </main>

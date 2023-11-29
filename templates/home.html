@@ -26,8 +26,9 @@
     .btn-primary {
       background-color: #007bff;
       border-color: #007bff;
-      font-size: 1.25rem;
-      padding: 10px 30px;
+      font-size: 1.5rem;
+      padding: 15px 40px;
+      border-radius: 10px;
     }
 
     .btn-primary:hover {
@@ -49,12 +50,15 @@
 {% block content %}
   <div class="container text-center bg-light ">
 
-    <div class="bordered p-5 m-4">
+    <div class="bordered p-5 m-4 p-3">
       <h1>Welcome to BoQ Taking Off!</h1>
-      <p class="lead">We're thrilled to have you on board. Step into efficiency with our cutting-edge platform, designed to streamline your processes and elevate your experience. Whether you're a seasoned professional or new to the industry, BoQ Taking Off is your key to precision and productivity. Get ready to soar to new heights as you navigate through a world of efficiency. Thank you for choosing BoQ Taking Off—we're here to support your success every step of the way!</p>
+      <p class="lead">Step into efficiency with our cutting-edge platform, designed to streamline your processes and elevate your experience. Thank you for choosing BoQ Taking Off—we're here to support your success every step of the way!</p>
     </div>
 
     <p>Login to access the system:</p>
-    <a href="/login" class="btn btn-primary py-2">Login</a>
+    <div class="p-4">
+      <a href="/login" class="btn btn-primary py-2">Login</a>
+    </div>
+
   </div>
 {% endblock %}

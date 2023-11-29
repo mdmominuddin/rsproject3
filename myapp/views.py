@@ -1,40 +1,41 @@
-from django.shortcuts import render
-from django.contrib.auth import login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserRegistrationForm, UserLoginForm, FileAnalysisForm
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.shortcuts import get_object_or_404
+from .forms import UserRegistrationForm, FileAnalysisForm, UserLoginForm
 from .models import FileAnalysis
 
-
+global site_name
+site_name = "AutoCAD Take-off"
 @login_required
 def home(request):
     form = FileAnalysisForm()
+
     if request.method == 'POST':
         form = FileAnalysisForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.user = request.user  # Set the user field to the logged-in user
+            # Set the user field to the logged-in user
+            form.instance.user = request.user
             form.save()
             messages.success(request, "File analysis data saved successfully.")
-            return redirect('analysis')  # Redirect to your analysis page or wherever you want
+            return redirect('analysis')
         else:
             print(form.errors)
     else:
         form = FileAnalysisForm()
 
+    # Retrieve analyses for the current user
     analyses = FileAnalysis.objects.filter(user=request.user)
 
     return render(request, 'homepage.html', {'form': form, 'analyses': analyses})
 
 
 
+
+
 def public_home(request):
-    message = "Welcome to BQ Analysis System. This is an application meant to analyze BOQ and make automatic responses. To get access"
-    context = {
-        'message': message
-    }
-    return render(request, 'home.html', context)
+    return render(request, 'home.html')
 
 
 def register(request):
@@ -74,19 +75,26 @@ def user_logout(request):
 
 @login_required
 def file_analysis(request):
-    data = FileAnalysis.objects.all()
+    if request.method == 'POST':
+        form = FileAnalysisForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.instance.filename = form.cleaned_data['filename']
+            form.instance.note = form.cleaned_data['note']
+            form.save()
+            messages.success(request, "File analysis data saved successfully.")
+            return redirect('analysis')
+    else:
+        form = FileAnalysisForm()
+
     analyses = FileAnalysis.objects.filter(user=request.user)
     context = {
-        'data': data,
+        'form': form,
         'analyses': analyses
     }
     return render(request, 'analysis.html', context)
 
 
-def file_analysis_detail(request, analysis_id):
-    file_analysis = get_object_or_404(FileAnalysis, id=analysis_id)
-    context = {'file_analysis': file_analysis}
-    return render(request, 'file_analysis_detail.html', context)
 
 
 @login_required

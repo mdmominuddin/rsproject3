@@ -28,24 +28,52 @@
 {% endblock head %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
 <h2 class="text-center">Register as an User</h2>
 <form method="post" class="register-form text-center">
     {% csrf_token %}
     <div class="form-group">
         <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
         {{ form.username }}
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="form-group">
         <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
         {{ form.email }}
+        {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="form-group">
         <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
         {{ form.password1 }}
+        {% if form.password1.errors %}
+            {% for error in form.password1.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="form-group">
         <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
         {{ form.password2 }}
+        {% if form.password2.errors %}
+            {% for error in form.password2.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
     </div>
     <button type="submit" class="btn btn-primary my-3 ">Confirm Registration</button>
 </form>

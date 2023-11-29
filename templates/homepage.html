@@ -1,75 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container mt-5 bg-grey">
-    <h2 class="text-center mb-4">Welcome to BoQ Take-Off <br> Upload and Analyze</h2>
-    <p class="text-center p-3">
-      Streamline your Bill of Quantities (BoQ) analysis with our advanced BoQ Take-Off application.
-      Upload your project files, and let us handle the analysis for you, providing insightful and automated responses.
-    </p>
-
-    <!-- Card for File Upload Form -->
-    <div class="card mx-auto" style="max-width: 500px;">
-      <div class="card-body">
-        <!-- Form for Uploading Files -->
-        <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-
-          <!-- User Name Field -->
-          <div class="mb-3">
-            <label for="{{ form.user.id_for_label }}" class="form-label">Your Name</label>
-            {{ form.user }}
-          </div>
-
-          <!-- Project Name Field -->
-          <div class="mb-3">
-            <label for="{{ form.projectname.id_for_label }}" class="form-label">Project Name</label>
-            {{ form.projectname }}
-          </div>
-
-          <!-- File Name Field -->
-          <div class="mb-3">
-            <label for="{{ form.filename.id_for_label }}" class="form-label">File Name</label>
-            {{ form.filename }}
-          </div>
-
-          <!-- Remark Field -->
-          <div class="mb-3">
-            <label for="{{ form.remark.id_for_label }}" class="form-label">Additional Notes</label>
-            {{ form.remark }}
-          </div>
-
-          <!-- File Upload Field -->
-          <div class="mb-3">
-            <label for="{{ form.uploadfile.id_for_label }}" class="form-label">Upload Your File</label>
-            {{ form.uploadfile }}
-          </div>
-
-          <!-- Submit Button -->
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-        <!-- End of Form -->
-      </div>
-    </div>
-
-    <!-- Section for Displaying Saved Files -->
-    <div class="mt-5">
-      <h3 class="text-center mb-4">Your Uploaded Files</h3>
-      <!-- List Group for Displaying Saved Files -->
-      <ul class="list-group">
-        {% for analysis in analyses %}
-          <!-- List Item for Each Saved File -->
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <strong>{{ analysis.filename }}</strong>
-            <!-- Link to View Detailed Analysis of the File -->
-            <a href="{% url 'file_analysis_detail' analysis.id %}" class="btn btn-sm btn-info">View Analysis</a>
-          </li>
-        {% endfor %}
-      </ul>
-      <!-- End of List Group -->
-    </div>
-    <!-- End of Section for Displaying Saved Files -->
+<div class="container mt-5">
+  <div class=" p-3 mt-1 my-3 text-center">
+    <h3>Upload CAD Files</h3>
   </div>
+
+  <!-- Card for File Upload Form -->
+  <div class="card mx-auto" style="max-width: 500px;">
+    <div class="card-body">
+      <!-- Form for Uploading Files -->
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Uploaded By -->
+        <div class="mb-3">
+          <label for="{{ form.user.id_for_label }}" class="form-label">Uploaded By</label>
+          {{ form.user }}
+        </div>
+
+        <!-- File Name -->
+        <div class="mb-3">
+          <label for="{{ form.filename.id_for_label }}" class="form-label">File Name</label>
+          {{ form.filename }}
+        </div>
+
+        <!-- Date -->
+        <div class="mb-3">
+          <label for="{{ form.date.id_for_label }}" class="form-label">Date</label>
+          {{ form.date }}
+        </div>
+
+        <!-- Notes -->
+        <div class="mb-3">
+          <label for="{{ form.note.id_for_label }}" class="form-label">Notes</label>
+          {{ form.note }}
+        </div>
+
+        <!-- Upload Your File -->
+        <div class="mb-3">
+          <label for="{{ form.uploadfile.id_for_label }}" class="form-label">Upload Your File</label>
+          {{ form.uploadfile }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+      </form>
+      <!-- End of Form -->
+    </div>
+  </div>
+</div>
 {% endblock %}
