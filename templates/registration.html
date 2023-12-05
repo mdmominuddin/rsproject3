@@ -2,80 +2,109 @@
 
 {% block head %}
 <style>
-.form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    max-width: 500px;
-}
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
 
-.form-group label {
-    margin-bottom: 0.5rem;
-    text-align: left;
-}
+    .register-form {
+        max-width: 500px;
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        background-color: #f8f9fa;
+    }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid #ced4da;
-    width: 100%;
-}
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .already-registered {
+        margin-top: 1rem;
+    }
 </style>
 {% endblock head %}
 
 {% block content %}
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container form-container">
+    <form method="post" class="register-form text-center">
+        {% csrf_token %}
+        <h2 class="text-center mb-4">Register as a User</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
         </div>
-    {% endfor %}
-{% endif %}
-<h2 class="text-center">Register as an User</h2>
-<form method="post" class="register-form text-center">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-        {{ form.username }}
-        {% if form.username.errors %}
-            {% for error in form.username.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <div class="form-group">
-        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-        {{ form.email }}
-        {% if form.email.errors %}
-            {% for error in form.email.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <div class="form-group">
-        <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
-        {{ form.password1 }}
-        {% if form.password1.errors %}
-            {% for error in form.password1.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <div class="form-group">
-        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-        {{ form.password2 }}
-        {% if form.password2.errors %}
-            {% for error in form.password2.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <button type="submit" class="btn btn-primary my-3 ">Confirm Registration</button>
-</form>
-<p class="already-registered text-center">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                {% for error in form.password1.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                {% for error in form.password2.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary my-3 text-center">Confirm Registration</button>
+    </form>
+</div>
+<p class="text-center already-registered">Already have an account? <a href="{% url 'login' %}">Login</a></p>
 {% endblock %}

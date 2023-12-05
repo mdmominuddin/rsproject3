@@ -1,55 +1,81 @@
 {% extends "base.html" %}
 
+{% block head %}
+<style>
+    .custom-bg {
+        background-color: #56baed;  <!-- Corrected -->
+        color: #fff;  <!-- Added text color for better visibility -->
+        padding: 20px;  <!-- Added padding for better spacing -->
+    }
+
+    .card-upload {
+        max-width: 33%;
+        margin: auto;  <!-- Center the card -->
+    }
+
+    .footer {
+        background-color: #343a40;  <!-- Dark background color for the footer -->
+        max-height: 50px;
+        padding: 10px;  <!-- Added padding for better spacing -->
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-  <div class=" p-3 mt-1 my-3 text-center">
-    <h3>Upload CAD Files</h3>
-  </div>
-
-  <!-- Card for File Upload Form -->
-  <div class="card mx-auto" style="max-width: 500px;">
-    <div class="card-body">
-      <!-- Form for Uploading Files -->
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <!-- Uploaded By -->
-        <div class="mb-3">
-          <label for="{{ form.user.id_for_label }}" class="form-label">Uploaded By</label>
-          {{ form.user }}
-        </div>
-
-        <!-- File Name -->
-        <div class="mb-3">
-          <label for="{{ form.filename.id_for_label }}" class="form-label">File Name</label>
-          {{ form.filename }}
-        </div>
-
-        <!-- Date -->
-        <div class="mb-3">
-          <label for="{{ form.date.id_for_label }}" class="form-label">Date</label>
-          {{ form.date }}
-        </div>
-
-        <!-- Notes -->
-        <div class="mb-3">
-          <label for="{{ form.note.id_for_label }}" class="form-label">Notes</label>
-          {{ form.note }}
-        </div>
-
-        <!-- Upload Your File -->
-        <div class="mb-3">
-          <label for="{{ form.uploadfile.id_for_label }}" class="form-label">Upload Your File</label>
-          {{ form.uploadfile }}
-        </div>
-
-        <!-- Submit Button -->
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-      </form>
-      <!-- End of Form -->
+<div class="container-fluid">
+    <div class="p-3 mt-1 my-3 text-center">
+        <h3>Upload CAD Files</h3>
     </div>
-  </div>
+
+    <!-- Card for File Upload Form -->
+    <div class="card card-upload">
+        <div class="card-body">
+            <!-- Form for Uploading Files -->
+            <form method="post" enctype="multipart/form-data" class="m-1">
+                {% csrf_token %}
+
+                <!-- Uploaded By -->
+                <div class="mb-3">
+                    <label for="{{ form.user.id_for_label }}" class="form-label">Uploaded By</label>
+                    {{ form.user }}
+                </div>
+
+                <!-- File Name -->
+                <div class="mb-3">
+                    <label for="{{ form.filename.id_for_label }}" class="form-label">File Name</label>
+                    {{ form.filename }}
+                </div>
+
+                <!-- Date -->
+                <div class="mb-3">
+                    <label for="{{ form.date.id_for_label }}" class="form-label">Date</label>
+                    {{ form.date }}
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-3">
+                    <label for="{{ form.note.id_for_label }}" class="form-label">Notes</label>
+                    {{ form.note }}
+                </div>
+
+                <!-- Upload Your File -->
+                <div class="mb-3">
+                    <label for="{{ form.uploadfile.id_for_label }}" class="form-label">Upload Your File</label>
+                    {{ form.uploadfile }}
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+            </form>
+            <!-- End of Form -->
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p class="text-center text-white">Copyright@rs</p>
 </div>
 {% endblock %}

@@ -3,62 +3,71 @@
 {% block head %}
   <style>
     body {
-      background-color: #f8f9fa;
+      background-color: #f8f9fa; /* Light Grayish Blue */
+      margin: 0;
+      font-family: 'Arial', sans-serif;
     }
 
     .container {
-      margin-top: 100px;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #ffffff; /* White */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
     }
 
     h1 {
       font-size: 2.5rem;
       font-weight: bold;
-      margin-bottom: 30px;
-      color: #007bff; /* Primary Color */
+      margin-bottom: 20px;
+      color: #3498db; /* Blue */
     }
 
     p {
       font-size: 1.25rem;
-      margin-bottom: 30px;
-      color: #495057; /* Text Color */
+      margin-bottom: 20px;
+      color: #555; /* Dark Gray */
     }
 
     .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
+      background-color: #3498db; /* Blue */
+      border-color: #3498db; /* Blue */
+      color: #fff; /* White */
       font-size: 1.5rem;
       padding: 15px 40px;
       border-radius: 10px;
+      text-decoration: none;
     }
 
     .btn-primary:hover {
-      background-color: #0056b3; /* Darker shade on hover */
-      border-color: #004080; /* Darker shade on hover */
+      background-color: #2980b9; /* Darker Blue on hover */
+      border-color: #2980b9; /* Darker Blue on hover */
     }
 
     .bordered {
-      border: 1px solid #dee2e6; /* Border Color */
+      border: 2px solid #e0e0e0; /* Light Gray */
       border-radius: 8px;
     }
 
-    .bg-light {
-      background-color: #fff; /* Light Background Color */
+    .bg-outside {
+      background-color: #3498db; /* Blue */
+      color: #fff; /* White */
     }
   </style>
 {% endblock head %}
 
 {% block content %}
-  <div class="container text-center bg-light ">
+  <body>
+    <div class="container text-center bordered bg-light bg-outside">
+      <div class="p-5 m-4 p-3">
+        <h1>Welcome to BoQ Taking Off!</h1>
+        <p class="lead">Step into efficiency with our cutting-edge platform, designed to streamline your processes and elevate your experience. Thank you for choosing BoQ Taking Off—we're here to support your success every step of the way!</p>
+      </div>
 
-    <div class="bordered p-5 m-4 p-3">
-      <h1>Welcome to BoQ Taking Off!</h1>
-      <p class="lead">Step into efficiency with our cutting-edge platform, designed to streamline your processes and elevate your experience. Thank you for choosing BoQ Taking Off—we're here to support your success every step of the way!</p>
+      <p>Login to access the system:</p>
+      <div class="p-4">
+        <a href="/login" class="btn btn-primary py-2">Login</a>
+      </div>
     </div>
-
-    <p>Login to access the system:</p>
-    <div class="p-4">
-      <a href="/login" class="btn btn-primary py-2">Login</a>
-    </div>
-
-  </div>
+  </body>
 {% endblock %}
